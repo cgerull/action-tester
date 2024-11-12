@@ -39,14 +39,14 @@ jobs:
           echo "IMAGE_ID raw = $IMAGE_ID"
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          if [[ "${{ github.ref.type }}" == "branch" ]]; then
+          if [[ "${{ github.ref.type }}" = "branch" ]]; then
             VERSION=latest
           else
             # Strip git ref prefix from version
             VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
             echo "GITHUB_REF = $VERSION"
             # Strip "v" prefix from tag name
-            [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+            [[ "${{ github.ref }}" = "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           fi
 
           # # Use Docker `latest` tag convention
