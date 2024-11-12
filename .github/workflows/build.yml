@@ -9,7 +9,7 @@ jobs:
       packages: write
       contents: read
     env:
-      IMAGE_NAME: jtestserver
+      IMAGE_NAME: myAction
       IMAGE_TAG: none
 
     steps:
@@ -65,11 +65,11 @@ jobs:
           echo "Image name  = $IMAGE_NAME"
           echo "Image tag = $IMAGE_TAG"
 
-      # - name: Build and push
-      #   uses: docker/build-push-action@v6.9.0
-      #   with:
-      #     context: .
-      #     platforms: linux/amd64,linux/arm64
-      #     push: true
-      #     tags: "ghcr.io/${{ github.repository_owner }}/actiontest:latest"
-      #     # tags: user/app:latest
+      - name: Build and push
+        uses: docker/build-push-action@v6.9.0
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: "$IMAGE_NAME:$IMAGE_TAG"
+          # tags: user/app:latest
