@@ -64,6 +64,9 @@ jobs:
         run: |
           echo "Image name  = $IMAGE_NAME"
           echo "Image tag = $IMAGE_TAG"
+          echo "And now with env. notation"
+          echo "Image name  = ${{ env.IMAGE_NAME }}"
+          echo "Image tag = ${{ env.IMAGE_TAG }}"
 
       - name: Build and push
         uses: docker/build-push-action@v6.9.0
@@ -71,5 +74,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: "$IMAGE_NAME:$IMAGE_TAG"
+          tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
           # tags: user/app:latest
