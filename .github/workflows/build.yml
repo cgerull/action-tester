@@ -40,7 +40,7 @@ jobs:
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           echo "github.ref.type = $GITHUB_REF_TYPE"
-          if [[ "${{ github.ref.type }}" = "branch" ]]; then
+          if [[ "$GITHUB_REF_TYPE" = "branch" ]]; then
             VERSION=latest
           else
             # Strip git ref prefix from version
