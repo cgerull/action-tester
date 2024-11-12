@@ -43,23 +43,22 @@ jobs:
           if [[ "$GITHUB_REF_TYPE" = "branch" ]]; then
             VERSION=latest
           else
+            echo "GITHUB_REF = $GITHUB_REF"
             # Strip git ref prefix from version
             VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-            echo "GITHUB_REF = $VERSION"
+            echo "Stripped GITHUB_REF = $VERSION"
             # Strip "v" prefix from tag name
             [[ "${{ github.ref }}" = "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           fi
 
-          # # Use Docker `latest` tag convention
-          # #[ "$VERSION" == "main" ] && VERSION=latest
-          # [[ "${{ github.ref.type }}" == "branch" ]] && VERSION=latest
           echo "IMAGE_ID final =$IMAGE_ID"
           echo VERSION=$VERSION
           env | sort
-          # ls -R
-          # docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          # docker push $IMAGE_ID:$VERSION
 
+      - name: Print variables
+        run: |
+          echo "Image name  = $IMAGE_ID"
+          echo "Image tag = $VERSION"
 
       # - name: Build and push
       #   uses: docker/build-push-action@v6.9.0
