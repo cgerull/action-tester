@@ -10,6 +10,7 @@ jobs:
       contents: read
     env:
       IMAGE_NAME: jtestserver
+      IMAGE_TAG: none
 
     steps:
       - uses: actions/checkout@v4.2.2
@@ -54,9 +55,9 @@ jobs:
           echo "IMAGE_ID final = IMAGE_ID"
           echo "VERSION = $VERSION"
 
-          IMAGE_NAME=$IMAGE_ID
-          IMAGE_TAG=$VERSION
-
+          echo "IMAGE_NAME=$IMAGE_ID" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$VERSION" >> $GITHUB_ENV
+          echo " ******************************************* "
           env | sort
 
       - name: Print variables
