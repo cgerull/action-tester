@@ -51,14 +51,18 @@ jobs:
             [[ "${{ github.ref }}" = "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           fi
 
-          echo "IMAGE_ID final =$IMAGE_ID"
-          echo VERSION=$VERSION
+          echo "IMAGE_ID final = IMAGE_ID"
+          echo "VERSION = $VERSION"
+
+          IMAGE_NAME=$IMAGE_ID
+          IMAGE_TAG=$VERSION
+
           env | sort
 
       - name: Print variables
         run: |
-          echo "Image name  = $IMAGE_ID"
-          echo "Image tag = $VERSION"
+          echo "Image name  = $IMAGE_NAME"
+          echo "Image tag = $IMAGE_TAG"
 
       # - name: Build and push
       #   uses: docker/build-push-action@v6.9.0
